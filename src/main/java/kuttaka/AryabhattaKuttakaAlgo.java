@@ -48,14 +48,17 @@ public class AryabhattaKuttakaAlgo {
         Long m = reducerTuple.getReminder();
         Long p = constant / reducerTuple.getDivisor();
         Long creeper = reducerTuple.getQuotient() * m + p;
+        int quotientCount = 1;
         while (!reducerTupleStack.isEmpty()) {
             creeper = reducerTuple.getQuotient() * m + p;
             p = m;
             m = creeper;
             reducerTuple = reducerTupleStack.pop();
+            quotientCount++;
         }
 
-        return creeper % coefficientX;
+        System.out.println("Quotient Count :" + quotientCount);
+        return creeper > coefficientX ? creeper % coefficientX : creeper;
     }
 
     public Long getCoefficientX() {

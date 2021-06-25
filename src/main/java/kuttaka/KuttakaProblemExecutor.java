@@ -9,10 +9,9 @@ public class KuttakaProblemExecutor {
     public void execute() {
         for (AryabhattaKuttakaAlgo kuttakaProblem : getProblems()) {
             Map<Long, Long> result = getXandY(kuttakaProblem);
-            System.out.println(" ---- Problem -----");
-            System.out.println("X = " + result.entrySet().stream().findFirst().get().getKey());
-            System.out.println("Y = ( aX + c ) / b");
-            System.out.println("Y = " + result.entrySet().stream().findFirst().get().getValue());
+            System.out.println(" ---------");
+            System.out.println("Y = ( "+ kuttakaProblem.getCoefficientX() + "X + "+ kuttakaProblem.getConstant() + ") / "+ kuttakaProblem.getCoefficientY() );
+            System.out.println("X = " + result.entrySet().stream().findFirst().get().getKey() + ", Y = " + result.entrySet().stream().findFirst().get().getValue());
         }
 
     }
@@ -26,7 +25,22 @@ public class KuttakaProblemExecutor {
     private List<AryabhattaKuttakaAlgo> getProblems() {
         List<AryabhattaKuttakaAlgo> kuttakaProblemList = new ArrayList<>();
         kuttakaProblemList.add(new AryabhattaKuttakaAlgo(9L, 11L, 6L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(6L, 13L, 1L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(15L, 23L, 9L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(43L, 9L, 13L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(7L, 8L, 3L));
         kuttakaProblemList.add(new AryabhattaKuttakaAlgo(7L, 9L, 4L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(7L, 9L, 2L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(9L, 7L, 1L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(9L, 7L, 1L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(9L, 7L, 3L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(91L, 144L, 22L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(234L, 173L, 28L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(447L, 11L, 9L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(701L, 199L, 1L));
+        kuttakaProblemList.add(new AryabhattaKuttakaAlgo(3175L, 1922L, 50L));
+
+
         return kuttakaProblemList;
     }
 }

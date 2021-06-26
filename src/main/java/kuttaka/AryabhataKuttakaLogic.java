@@ -3,6 +3,11 @@ package kuttaka;
 import java.util.*;
 
 /**
+ *  * Credits :
+ *  * Badri Sheshadri | Twitter Handle : https://twitter.com/bseshadri
+ */
+
+/**
  * y = (ax + c) / b , where a is coefficientX, b is coefficientY, c is constant
  * we use Aryabhata's Kuttaka algorithm to find the integer solutions
  *

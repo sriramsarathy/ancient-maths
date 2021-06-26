@@ -4,28 +4,32 @@ import java.util.*;
 
 /**
  * y = (ax + c) / b , where a is coefficientX, b is coefficientY, c is constant
- * we use Aryabhatta's Kuttaka algorithm to find
+ * we use Aryabhata's Kuttaka algorithm to find the integer solutions
  *
  * @author sriramsarathy
  */
-public class AryabhattaKuttakaAlgo {
+public class AryabhataKuttakaLogic {
     private Long coefficientX;
     private Long coefficientY;
     private Long constant;
 
-    public AryabhattaKuttakaAlgo(Long coefficientX, Long coefficientY, Long constant) {
+    public AryabhataKuttakaLogic(Long coefficientX, Long coefficientY, Long constant) {
         this.coefficientX = coefficientX;
         this.coefficientY = coefficientY;
         this.constant = constant;
     }
 
+    public Long applyKuttaka() {
+        return valli(repeatedDivision());
+    }
+
     private ReducerTuple divisionStep(Long dividend, Long divisor) {
         Long reminder = dividend % divisor;
         Long quotient = dividend / divisor;
-        return new ReducerTuple(reminder, divisor, quotient);
+        return new ReducerTuple(divisor, quotient, reminder);
     }
 
-    public Stack<ReducerTuple> repeatedDivision() {
+    private Stack<ReducerTuple> repeatedDivision() {
         Long dividend = coefficientX, divisor = coefficientY;
         Stack<ReducerTuple> reducerTuplesStack = new Stack<>();
         while (divisor != 0) {
@@ -38,27 +42,39 @@ public class AryabhattaKuttakaAlgo {
     }
 
     /**
-     * (constant ) / last divisor = p
+     * (m * reminder + constant ) / last_divisor = p
      *
      * @param reducerTupleStack
      * @return creeper
      */
-    public Long valli(Stack<ReducerTuple> reducerTupleStack) {
+    private Long valli(Stack<ReducerTuple> reducerTupleStack) {
         ReducerTuple reducerTuple = reducerTupleStack.pop();
         Long m = reducerTuple.getReminder();
-        Long p = constant / reducerTuple.getDivisor();
+
+        /**
+         *  Special case when last divisor is and there are odd number of quotients
+         *  Stop before the last step and re-calculate m & p .
+         */
+        if ((reducerTupleStack.size() % 2 != 0) && reducerTuple.getDivisor() == 1) {
+            reducerTuple = reducerTupleStack.pop();
+            m = reducerTuple.getDivisor() - (constant % reducerTuple.getDivisor()) ;
+
+        }
+        //initialize before the valli steps
+        Long p = (m + constant )/ reducerTuple.getDivisor();
         Long creeper = reducerTuple.getQuotient() * m + p;
-        int quotientCount = 1;
-        while (!reducerTupleStack.isEmpty()) {
+        int evenQuotients = reducerTupleStack.size() - (reducerTupleStack.size() % 2);
+
+        /** Creeper logic **/
+        while (--evenQuotients >= 0) {
             creeper = reducerTuple.getQuotient() * m + p;
             p = m;
             m = creeper;
             reducerTuple = reducerTupleStack.pop();
-            quotientCount++;
         }
 
-        System.out.println("Quotient Count :" + quotientCount);
-        return creeper > coefficientX ? creeper % coefficientX : creeper;
+        // To get the first integer (X) which solves the equation.
+        return creeper > coefficientY ? creeper % coefficientY : creeper;
     }
 
     public Long getCoefficientX() {

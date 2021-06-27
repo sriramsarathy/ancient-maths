@@ -38,7 +38,7 @@ public class KuttakaProblemExecutor {
         kuttakaProblemList.add(new AryabhataKuttakaLogic(447L, 11L, 9L));
         kuttakaProblemList.add(new AryabhataKuttakaLogic(701L, 199L, 1L));
         kuttakaProblemList.add(new AryabhataKuttakaLogic(3175L, 1922L, 50L));
-
+        kuttakaProblemList.add(new AryabhataKuttakaLogic(576L, 210389L, 1L));
         return kuttakaProblemList;
     }
 }
